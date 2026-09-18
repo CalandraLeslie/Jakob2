@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Elena Marsh — Writer &amp; Historian</title>
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="apple-touch-icon" href="favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600;9..144,700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#171512;
+    --paper:#EFE9DA;
+    --paper-2:#E4DCC8;
+    --red:#C1121F;
+    --red-dim:#8f0d17;
+    --navy:#1B263B;
+    --mustard:#E9B44C;
+    --line: rgba(23,21,18,0.14);
+    color-scheme: light;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Space Grotesk', sans-serif;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  ::selection{ background:var(--red); color:var(--paper); }
+
+  a{ color:inherit; }
+  img{ max-width:100%; display:block; }
+
+  .spine{
+    position:fixed;
+    top:0; left:56px;
+    width:2px; height:100%;
+    background:var(--line);
+    z-index:1;
+  }
+  @media (max-width:720px){ .spine{ left:24px; } }
+
+  .wrap{
+    max-width:1040px;
+    margin:0 auto;
+    padding:0 56px 0 96px;
+    position:relative;
+  }
+  @media (max-width:720px){
+    .wrap{ padding:0 20px 0 56px; }
+  }
+
+  /* ---------- Header / TOC nav ---------- */
+  header{
+    padding:32px 0 18px;
+    display:flex;
+    justify-content:space-between;
+    align-items:baseline;
+    border-bottom:1px solid var(--line);
+    font-size:0.82rem;
+    letter-spacing:0.02em;
+  }
+  header .mark{
+    font-family:'Fraunces', serif;
+    font-weight:600;
+    font-size:1.05rem;
+  }
+  header nav{ display:flex; gap:28px; }
+  header nav a{ text-decoration:none; position:relative; }
+  header nav a::after{
+    content:"";
+    position:absolute; left:0; right:0; bottom:-4px;
+    height:1px; background:var(--red);
+    transform:scaleX(0); transform-origin:left;
+    transition:transform .25s ease;
+  }
+  header nav a:hover::after, header nav a:focus-visible::after{ transform:scaleX(1); }
+  @media (max-width:640px){ header nav{ display:none; } }
+
+  /* ---------- Hero ---------- */
+  .hero{
+    padding:64px 0 40px;
+    display:grid;
+    grid-template-columns:1.3fr 1fr;
+    gap:40px;
+    align-items:end;
+  }
+  @media (max-width:820px){
+    .hero{ grid-template-columns:1fr; }
+  }
+  .eyebrow-line{
+    display:flex; align-items:center; gap:12px;
+    margin-bottom:22px;
+    font-size:0.82rem;
+    color:var(--red-dim);
+  }
+  .eyebrow-line .dash{ width:32px; height:1px; background:var(--red); }
+
+  h1.title{
+    font-family:'Fraunces', serif;
+    font-weight:600;
+    font-size:clamp(3rem, 9vw, 6.4rem);
+    line-height:0.94;
+    letter-spacing:-0.01em;
+    margin:0 0 6px;
+  }
+  h1.title em{
+    font-style:italic;
+    font-weight:400;
+    color:var(--red);
+  }
+  .role{
+    font-size:1.05rem;
+    max-width:32ch;
+    line-height:1.5;
+    color:#3a352f;
+    margin-top:18px;
+  }
+
+  .portrait{
+    position:relative;
+    justify-self:end;
+    width:min(300px, 82%);
+  }
+  .portrait img{
+    width:100%;
+    height:auto;
+    display:block;
+    border-radius:18px;
+    border:1px solid rgba(23,21,18,0.16);
+    box-shadow:0 18px 35px rgba(23,21,18,0.08);
+    background:#d9d3c8;
+  }
+  .portrait figcaption{
+    font-size:0.72rem;
+    color:#6b6558;
+    margin-top:10px;
+    text-align:right;
+  }
+
+  /* ---------- Section scaffolding ---------- */
+  section{ padding:64px 0; border-bottom:1px solid var(--line); }
+  section:last-of-type{ border-bottom:none; }
+
+  .section-head{
+    display:grid;
+    grid-template-columns:100px 1fr;
+    gap:24px;
+    margin-bottom:34px;
+  }
+  @media (max-width:640px){
+    .section-head{ grid-template-columns:1fr; gap:6px; }
+  }
+  .section-num{
+    font-family:'Fraunces', serif;
+    font-style:italic;
+    color:var(--red);
+    font-size:1rem;
+    padding-top:4px;
+  }
+  .section-head h2{
+    font-family:'Fraunces', serif;
+    font-weight:500;
+    font-size:clamp(1.7rem, 3.4vw, 2.4rem);
+    margin:0;
+    letter-spacing:-0.01em;
+  }
+
+  /* ---------- About ---------- */
+  .about-body{
+    display:grid;
+    grid-template-columns:100px 1fr;
+    gap:24px;
+  }
+  @media (max-width:640px){ .about-body{ grid-template-columns:1fr; } }
+  .about-body p{
+    font-size:1.08rem;
+    line-height:1.75;
+    max-width:62ch;
+    margin:0 0 20px;
+    color:#2a2621;
+  }
+  .pull{
+    font-family:'Fraunces', serif;
+    font-style:italic;
+    font-size:1.5rem;
+    line-height:1.5;
+    color:var(--navy);
+    border-left:2px solid var(--red);
+    padding-left:22px;
+    margin:34px 0;
+    max-width:52ch;
+  }
+
+  .facts{
+    display:flex;
+    gap:40px;
+    margin-top:36px;
+    flex-wrap:wrap;
+  }
+  .fact b{
+    display:block;
+    font-family:'Fraunces', serif;
+    font-size:1.7rem;
+    font-weight:600;
+  }
+  .fact span{
+    font-size:0.82rem;
+    color:#6b6558;
+  }
+
+  /* ---------- Bibliography / works ---------- */
+  .biblio{
+    display:grid;
+    grid-template-columns:100px 1fr;
+    gap:24px;
+  }
+  @media (max-width:640px){ .biblio{ grid-template-columns:1fr; } }
+  .biblio-list{ list-style:none; margin:0; padding:0; }
+  .biblio-list li{
+    display:grid;
+    grid-template-columns:70px 1fr auto;
+    gap:20px;
+    align-items:baseline;
+    padding:20px 0;
+    border-bottom:1px solid var(--line);
+  }
+  .biblio-list li:first-child{ padding-top:0; }
+  @media (max-width:640px){
+    .biblio-list li{ grid-template-columns:1fr; gap:4px; }
+  }
+  .biblio-year{
+    font-size:0.85rem;
+    color:var(--red-dim);
+    font-weight:500;
+  }
+  .biblio-title{
+    font-family:'Fraunces', serif;
+    font-size:1.2rem;
+    font-weight:500;
+  }
+  .biblio-tag{
+    font-size:0.78rem;
+    color:#6b6558;
+    white-space:nowrap;
+    align-self:center;
+  }
+  .biblio-desc{
+    grid-column:2 / span 1;
+    font-size:0.92rem;
+    color:#5a5348;
+    margin-top:4px;
+    max-width:56ch;
+  }
+  @media (max-width:640px){ .biblio-desc{ grid-column:1; } }
+
+  /* ---------- Press ---------- */
+  .press-grid{
+    display:grid;
+    grid-template-columns:100px 1fr 1fr;
+    gap:24px;
+  }
+  @media (max-width:820px){ .press-grid{ grid-template-columns:100px 1fr; } }
+  @media (max-width:640px){ .press-grid{ grid-template-columns:1fr; } }
+  .press-quote{
+    font-family:'Fraunces', serif;
+    font-size:1.15rem;
+    line-height:1.55;
+    margin:0 0 14px;
+  }
+  .press-source{
+    font-size:0.8rem;
+    color:#6b6558;
+  }
+
+  /* ---------- Contact ---------- */
+  .contact-body{
+    display:grid;
+    grid-template-columns:100px 1fr;
+    gap:24px;
+    align-items:start;
+  }
+  @media (max-width:640px){ .contact-body{ grid-template-columns:1fr; } }
+  .contact-cta{
+    font-family:'Fraunces', serif;
+    font-size:clamp(1.8rem, 4vw, 2.6rem);
+    line-height:1.2;
+    max-width:16ch;
+    margin:0 0 28px;
+  }
+  .contact-links{
+    display:flex;
+    flex-direction:column;
+    gap:12px;
+    font-size:1rem;
+  }
+  .contact-links a{
+    text-decoration:none;
+    border-bottom:1px solid var(--line);
+    padding-bottom:12px;
+    display:flex;
+    justify-content:space-between;
+    max-width:420px;
+    transition:border-color .2s ease, color .2s ease;
+  }
+  .contact-links a:hover, .contact-links a:focus-visible{
+    color:var(--red);
+    border-color:var(--red);
+  }
+
+  footer{
+    padding:28px 0 40px;
+    font-size:0.76rem;
+    color:#7a7362;
+    display:flex;
+    justify-content:space-between;
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    *{ transition:none !important; }
+  }
+
+  :focus-visible{
+    outline:2px solid var(--red);
+    outline-offset:3px;
+  }
+</style>
+</head>
+<body>
+
+<div class="spine" aria-hidden="true"></div>
+
+<div class="wrap">
+
+  <header>
+    <div class="mark">E. Marsh</div>
+    <nav>
+      <a href="#about">About</a>
+      <a href="#works">Works</a>
+      <a href="#press">Press</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </header>
+
+  <section class="hero" id="top">
+    <div>
+      <div class="eyebrow-line"><span class="dash"></span> Historian of the Atlantic World</div>
+      <h1 class="title">Jakob<br><em>Shapiro</em></h1>
+      <p class="role">I write books and essays about migration, memory, and the port cities that shaped the modern Atlantic — most recently as a fellow at the Institute for Advanced Study.</p>
+    </div>
+    <figure class="portrait">
+      <img src="1591655633619.jpeg" alt="Portrait of Elena Marsh">
+      <figcaption>Portrait</figcaption>
+    </figure>
+  </section>
+
+  <section id="about">
+    <div class="section-head">
+      <div class="section-num">01</div>
+      <h2>About</h2>
+    </div>
+    <div class="about-body">
+      <div></div>
+      <div>
+        <p>I'm a historian and essayist working at the intersection of migration studies and cultural memory. My research follows the movement of people, letters, and ideas through the port cities of the nineteenth-century Atlantic — Liverpool, Lagos, Recife, New Orleans — and what those crossings left behind.</p>
+        <p>I hold a doctorate in History from the University of Edinburgh and have taught at Brown University and the University of Cape Town. My writing has appeared in <em>The Atlantic</em>, <em>n+1</em>, and the <em>London Review of Books</em>, alongside two books published by an academic and a trade press.</p>
+        <p class="pull">"History is not the past — it's the argument we're still having about it."</p>
+        <p>Outside of research, I run a small reading group for first-generation graduate students and am slowly, stubbornly, learning Portuguese.</p>
+        <div class="facts">
+          <div class="fact"><b>12</b><span>years researching</span></div>
+          <div class="fact"><b>2</b><span>books published</span></div>
+          <div class="fact"><b>30+</b><span>essays &amp; articles</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="works">
+    <div class="section-head">
+      <div class="section-num">02</div>
+      <h2>Selected works</h2>
+    </div>
+    <div class="biblio">
+      <div></div>
+      <ul class="biblio-list">
+        <li>
+          <span class="biblio-year">2025</span>
+          <div>
+            <div class="biblio-title">Harbor of Strangers</div>
+            <div class="biblio-desc">A history of the boardinghouses and translators who met migrants at the Liverpool docks, 1840–1890.</div>
+          </div>
+          <span class="biblio-tag">Book — FSG</span>
+        </li>
+        <li>
+          <span class="biblio-year">2023</span>
+          <div>
+            <div class="biblio-title">The Return Passage</div>
+            <div class="biblio-desc">On the letters written by migrants who sailed home, and what "home" meant by the time they arrived.</div>
+          </div>
+          <span class="biblio-tag">Book — Duke UP</span>
+        </li>
+        <li>
+          <span class="biblio-year">2022</span>
+          <div>
+            <div class="biblio-title">What the Ledgers Don't Say</div>
+            <div class="biblio-desc">An essay on the silences in shipping manifests, and how historians read around them.</div>
+          </div>
+          <span class="biblio-tag">Essay — The Atlantic</span>
+        </li>
+        <li>
+          <span class="biblio-year">2021</span>
+          <div>
+            <div class="biblio-title">Recife, in Two Languages</div>
+            <div class="biblio-desc">A long-form piece on bilingual archives and the politics of translation in colonial record-keeping.</div>
+          </div>
+          <span class="biblio-tag">Essay — n+1</span>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="press">
+    <div class="section-head">
+      <div class="section-num">03</div>
+      <h2>Press &amp; praise</h2>
+    </div>
+    <div class="press-grid">
+      <div></div>
+      <div>
+        <p class="press-quote">"Marsh writes history the way the best novelists write character — with patience, and without judgment."</p>
+        <div class="press-source">The New York Review of Books</div>
+      </div>
+      <div>
+        <p class="press-quote">"A quietly radical book about who gets remembered, and who has to do the remembering."</p>
+        <div class="press-source">Times Literary Supplement</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <div class="section-head">
+      <div class="section-num">04</div>
+      <h2>Get in touch</h2>
+    </div>
+    <div class="contact-body">
+      <div></div>
+      <div>
+        <p class="contact-cta">For talks, reviews, or a coffee if you're in town.</p>
+        <div class="contact-links">
+          <a href="mailto:elena@elenamarsh.com">Email <span>elena@elenamarsh.com</span></a>
+          <a href="#">Twitter / X <span>@elenamarsh</span></a>
+          <a href="#">Faculty page <span>university.edu/history/marsh</span></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <span>© 2026 Jakob Shapiro</span>
+    <span>Stockholm, Sweden</span>
+  </footer>
+
+</div>
+
+</body>
+</html>
