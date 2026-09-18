@@ -1,6 +1,6 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Elena Marsh favicon">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Jakob Shapiro favicon">
   <rect width="64" height="64" rx="12" fill="#EFE9DA"/>
   <rect x="4" y="4" width="56" height="56" rx="10" fill="#1B263B" stroke="#C1121F" stroke-width="2"/>
-  <path d="M18 42V22h4l10 12 10-12h4v20h-6V29l-8 10-8-10v13h-6Z" fill="#EFE9DA"/>
-  <path d="M14 17h36" stroke="#C1121F" stroke-width="2" stroke-linecap="round"/>
+  <path d="M18 18h7l7 14 7-14h7v28h-6V27l-8 16-8-16v19h-6V18Z" fill="#EFE9DA"/>
+  <path d="M14 18h36" stroke="#C1121F" stroke-width="2" stroke-linecap="round"/>
 </svg>
