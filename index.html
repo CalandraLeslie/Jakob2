@@ -119,6 +119,11 @@
     line-height:1.5;
     color:#3a352f;
     margin-top:18px;
+    min-height:4.5em;
+    transition:opacity .7s ease;
+  }
+  .role.hidden {
+    opacity:0;
   }
 
   .portrait{
@@ -348,9 +353,9 @@
 
   <section class="hero" id="top">
     <div>
-      <div class="eyebrow-line"><span class="dash"></span> Историк Атлантического мира</div>
-      <h1 class="title">Яков<br><em>Шапиро</em></h1>
-      <p class="role">Я пишу книги и эссе о миграции, памяти и портовых городах, сформировавших современный Атлантический мир, — в последнее время как научный сотрудник Института перспективных исследований.</p>
+      <div class="eyebrow-line"><span class="dash"></span> <span id="eyebrow-text">Историк Атлантического мира</span></div>
+      <h1 class="title" id="name-text">Яков<br><em>Шапиро</em></h1>
+      <p class="role" id="role-text">Я пишу книги и эссе о миграции, памяти и портовых городах, сформировавших современный Атлантический мир, — в последнее время как научный сотрудник Института перспективных исследований.</p>
     </div>
     <figure class="portrait">
       <img src="1591655633619.jpeg" alt="Portrait of Jakob Shapiro">
@@ -465,6 +470,41 @@
   </footer>
 
 </div>
+
+<script>
+  const heroStates = [
+    {
+      eyebrow: 'Историк Атлантического мира',
+      name: 'Яков<br><em>Шапиро</em>',
+      role: 'Я пишу книги и эссе о миграции, памяти и портовых городах, сформировавших современный Атлантический мир, — в последнее время как научный сотрудник Института перспективных исследований.'
+    },
+    {
+      eyebrow: 'Historian of the Atlantic World',
+      name: 'Jakob<br><em>Shapiro</em>',
+      role: 'I write books and essays about migration, memory, and the port cities that shaped the modern Atlantic — most recently as a fellow at the Institute for Advanced Study.'
+    }
+  ];
+
+  const eyebrowText = document.getElementById('eyebrow-text');
+  const nameText = document.getElementById('name-text');
+  const roleText = document.getElementById('role-text');
+
+  let currentState = 0;
+
+  setInterval(() => {
+    currentState = (currentState + 1) % heroStates.length;
+    const next = heroStates[currentState];
+
+    roleText.classList.add('hidden');
+
+    setTimeout(() => {
+      eyebrowText.textContent = next.eyebrow;
+      nameText.innerHTML = next.name;
+      roleText.textContent = next.role;
+      roleText.classList.remove('hidden');
+    }, 350);
+  }, 3000);
+</script>
 
 </body>
 </html>
